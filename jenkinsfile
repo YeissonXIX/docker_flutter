@@ -4,6 +4,9 @@ pipeline {
         stage('Build'){
             steps{
                 sh 'docker --version'
+                sh 'docker build -t wmb_mobile_image .'
+                sh 'docker images'
+                sh 'docker run wmb_mobile_image'
             }
         }
     }
