@@ -1,4 +1,4 @@
-FROM fischerscode/flutter-sudo:3.2.2
+FROM cirrusci/flutter
 COPY . . 
 RUN rm pubspec.lock
 RUN flutter build apk --split-per-abi 
