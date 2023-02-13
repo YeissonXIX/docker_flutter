@@ -3,10 +3,7 @@ pipeline {
     stages {
         stage('Build'){
             steps{
-                sh 'docker --version'
-                sh 'docker build -t wms_mobile_image .'
-                sh 'docker images'
-                sh 'docker-compose up -d'
+                sh 'docker-compose up --build -d'
             }
         }
     }
