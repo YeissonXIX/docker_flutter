@@ -1,9 +1,15 @@
 pipeline {
     agent any
     stages {
-        stage('Build'){
+        stage("Build"){
             steps{
-                sh 'docker-compose up --build'
+                sh "docker-compose up --build"
+            }
+        }
+        stage('Deploy'){
+            steps{
+                sh "version=$(grep 'version:' pubspect.yaml | awk '{print $2}')"
+                sh "echo $version > wms_mobile_versions.txt"
             }
         }
     }
