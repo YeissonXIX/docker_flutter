@@ -8,9 +8,7 @@ pipeline {
         }
         stage('Deploy'){
             steps{
-                sh "version=\$(grep 'version:' pubspec.yaml | awk '{print \$2}')"
-                sh "echo \$version > versions.txt"
-                sh "cat versions.txt"
+                sh "version=\$(grep 'version:' pubspec.yaml | awk '{print \$2}') && echo \$version > versions.txt"
             }
         }
     }
