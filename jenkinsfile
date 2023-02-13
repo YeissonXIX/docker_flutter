@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Deploy'){
             steps{
-                sh "version=$(grep 'version:' pubspect.yaml | awk '{print $2}')"
+                sh "version=$(grep 'version:' pubspec.yaml | awk '{print $2}')"
                 sh "echo $version > wms_mobile_versions.txt"
             }
         }
