@@ -6,7 +6,7 @@ pipeline {
                 sh 'docker --version'
                 sh 'docker build -t wms_mobile_image .'
                 sh 'docker images'
-                sh 'docker run --rm -v ./latest_apk:/app/build/app/outputs/flutter-apk wms_mobile_image'
+                sh 'docker run --rm --mount ./latest_apk:/app/build/app/outputs/flutter-apk wms_mobile_image'
             }
         }
     }
