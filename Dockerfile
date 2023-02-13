@@ -7,6 +7,8 @@ RUN mkdir -p .android && touch .android/repositories.cfg
 RUN wget -O sdk-tools.zip https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip
 RUN unzip sdk-tools.zip && rm sdk-tools.zip
 RUN ls -a
+RUN cd cmdline-tools
+RUN ls -a
 RUN mkdir -p Android/sdk/tools && mv tools Android/sdk/tools
 RUN cd Android/sdk/tools/bin
 RUN yes | ./sdkmanager --licenses
