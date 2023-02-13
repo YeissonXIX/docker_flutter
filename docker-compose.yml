@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  flutter:
+    image: "flutter_wms_app"
+    build: 
+        context: .
+        dockerfile: Dockerfile
+    volumes: 
+        - ./apks/:/app/build/app/outputs/flutter-apk
+
+      
