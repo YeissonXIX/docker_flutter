@@ -6,7 +6,7 @@ ENV ANDROID_SDK_ROOT Android/sdk
 RUN mkdir -p .android && touch .android/repositories.cfg
 RUN wget -O sdk-tools.zip https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip
 RUN unzip sdk-tools.zip && rm sdk-tools.zip
-RUN mkdir -p Android/sdk/tools/bin && mv ./cmdline-tools/bin/ Android/sdk/tools/bin
+RUN mkdir -p Android/sdk/tools && mv ./cmdline-tools/bin Android/sdk/tools/
 RUN cd Android/sdk/tools/bin && ls -a
 RUN yes | ./sdkmanager --licenses
 RUN ./sdkmanager "build-tools;30.0.3" "patcher;v4" "platform-tools" "platforms;android-31" "sources;android-31"
