@@ -7,6 +7,6 @@ services:
         context: .
         dockerfile: Dockerfile
     volumes: 
-        - ./apks/:/app/build/app/outputs/flutter-apk
+        - ./wms_apk/:/app/build/app/outputs/flutter-apk
 
       
