@@ -3,13 +3,14 @@ pipeline {
     stages {
         stage("Build"){
             steps{
-                sh "docker-compose up --build"
+                //sh "docker-compose up --build"
+                sh 'echo ${RECEIVINGBASEAPI}'
             }
         }
-        stage('Deploy'){
+       /*  stage('Deploy'){
             steps{
                 sh "echo \$(grep 'version:' pubspec.yaml | awk '{print \$2}' | awk -F '+' '{print \$1}') \$(date) > versions.txt"
             }
-        }
+        } */
     }
 }  

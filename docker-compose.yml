@@ -8,5 +8,6 @@ services:
         dockerfile: Dockerfile
     volumes: 
         - ./wms_apk/:/app/build/app/outputs/flutter-apk
+    
 
       
