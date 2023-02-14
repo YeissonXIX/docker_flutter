@@ -24,7 +24,7 @@ RUN cd Android/sdk/tools/bin/
 
 RUN yes | sdkmanager --licenses
 
-RUN sdkmanager "build-tools;&{ANDROID_BUILD_TOOLS}"
+RUN sdkmanager "build-tools;30.0.3"
 RUN sdkmanager "platform-tools"
 RUN sdkmanager "platforms;android-${ANDROID_COMPILE_SDK}"
 RUN sdkmanager "sources;android-${ANDROID_COMPILE_SDK}"
