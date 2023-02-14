@@ -9,7 +9,7 @@ pipeline {
         stage('Deploy'){
             steps{
                 sh "echo \$(grep 'version:' pubspec.yaml | awk '{print \$2}' | awk -F '+' '{print \$1}') \$(date) > versions.txt"
-                sh "scp ./apks/app-armeabi-v7a-release.apk wms1_windows:\\\Handheld\\\cicd_test"
+                sh "scp ./apks/app-armeabi-v7a-release.apk wms1_windows:\\\\Handheld\\\\cicd_test"
                 
             }
         }
