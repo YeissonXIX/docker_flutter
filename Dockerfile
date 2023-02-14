@@ -28,7 +28,7 @@ RUN sdkmanager "build-tools;&{ANDROID_BUILD_TOOLS}" "patcher;v4" "platform-tools
 
 ENV PATH "$PATH:$ANDROID_SDK_ROOT/tools"
 ENV PATH "$PATH:$ANDROID_SDK_ROOT/tools/bin"
-ENV PATH "$PATH:$ANDROID_SDK_ROOT/platfohrm-tools"
+ENV PATH "$PATH:$ANDROID_SDK_ROOT/platform-tools"
 #Copia todos los archivos del proyecto a la imagen
 COPY . . 
 
