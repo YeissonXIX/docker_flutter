@@ -24,7 +24,10 @@ RUN cd Android/sdk/tools/bin/
 
 RUN yes | sdkmanager --licenses
 
-RUN sdkmanager "build-tools;&{ANDROID_BUILD_TOOLS}" "patcher;v4" "platform-tools" "platforms;android-${ANDROID_COMPILE_SDK}" "sources;android-${ANDROID_COMPILE_SDK}"
+RUN sdkmanager "build-tools;&{ANDROID_BUILD_TOOLS}"
+RUN sdkmanager "platform-tools"
+RUN sdkmanager "platforms;android-${ANDROID_COMPILE_SDK}"
+RUN sdkmanager "sources;android-${ANDROID_COMPILE_SDK}"
 
 ENV PATH "$PATH:$ANDROID_SDK_ROOT/tools"
 ENV PATH "$PATH:$ANDROID_SDK_ROOT/tools/bin"
