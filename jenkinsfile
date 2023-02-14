@@ -4,7 +4,7 @@ pipeline {
         stage("Build"){
             steps{
                 //sh "docker-compose up --build"
-                sh 'echo ${RECEIVINGBASEAPI}'
+                sh 'echo ${env.RECEIVINGBASEAPI}'
             }
         }
        /*  stage('Deploy'){
