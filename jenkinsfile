@@ -3,14 +3,15 @@ pipeline {
     stages {
         stage("Build"){
             steps{
-                //sh "docker-compose up --build"
-                sh 'echo ${env.PATH}'
+                sh "docker-compose up --build"
             }
         }
-       /*  stage('Deploy'){
+        stage('Deploy'){
             steps{
                 sh "echo \$(grep 'version:' pubspec.yaml | awk '{print \$2}' | awk -F '+' '{print \$1}') \$(date) > versions.txt"
+                sh "scp ./apks/app-armeabi-v7a-release.apk wms1_windows:\\Handheld\\cicd_test\\"
+                
             }
-        } */
+        }
     }
 }  
