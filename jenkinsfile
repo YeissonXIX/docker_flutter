@@ -3,14 +3,23 @@ pipeline {
     stages {
         stage("Build"){
             steps{
+                //Habilitar variables de entorno
                 sh "cp /var/lib/jenkins/Environment/WMS_Mobile .env"
                 sh "docker-compose up --build"
             }
         }
         stage('Deploy'){
+            environment {
+                APK_VERSION = sh(
+                    returnStdout: true, 
+                    script: "echo \$(grep 'version:' pubspec.yaml | awk '{print \$2}')"
+                )
+            }
             steps{
-                sh "echo \$(grep 'version:' pubspec.yaml | awk '{print \$2}' | awk -F '+' '{print \$1}') \$(date) > versions.txt"
-                sh "scp ./apks/app-armeabi-v7a-release.apk wms1_windows:\\\\Handheld\\\\cicd_test"
+                //Cambiar el nombre del apk a su version actual
+                sh "mv app-armeabi-v7a-release.apk \${APK_VERSION}.apk"
+                //Enviar al servidor ftp
+                sh "scp ./apks/\${APK_VERSION}.apk wms1_windows:\\\\Handheld\\\\cicd_test"
                 
             }
         }
