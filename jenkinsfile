@@ -19,8 +19,7 @@ pipeline {
                 //Cambiar el nombre del apk a su version actual
                 //sh 'mv ./apks/app-armeabi-v7a-release.apk ${APK_VERSION}.apk'
                 //Enviar al servidor ftp
-                sh 'scp ./apks/app-armeabi-v7a-release.apk.apk wms1_windows:\\\\Handheld\\\\cicd_test'
-                
+                sh 'scp ./apks/app-armeabi-v7a-release.apk wms1_windows:\\\\Handheld\\\\cicd\\\\development'
             }
         }
     }
