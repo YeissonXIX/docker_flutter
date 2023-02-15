@@ -2,6 +2,11 @@ pipeline {
     agent any
     stages {
         stage("Build"){
+            when { 
+                expression { 
+                    GIT_BRANCH == "main" || GIT_BRANCH == "staging"
+                }
+            }
             steps{
                 //Habilitar variables de entorno
                 sh "cp /var/lib/jenkins/Environment/WMS_Mobile .env"
@@ -9,6 +14,11 @@ pipeline {
             }
         }
         stage('Deploy'){
+             when { 
+                expression { 
+                    GIT_BRANCH == "main" || GIT_BRANCH == "staging"
+                }
+            }
             environment {
                 APK_VERSION = sh(
                     returnStdout: true, 
