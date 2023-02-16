@@ -4,35 +4,6 @@
 pipeline {
     agent any
     stages {
-        stage("Build Development"){
-            when {
-                expression {
-                    return env.GIT_BRANCH =='staging'
-                }
-            }
-            steps{
-                sh "docker-compose -f docker-compose.dev.yml up --build"
-            }
-        }
-        stage('Deploy Development'){
-            when {
-                expression {
-                    return env.GIT_BRANCH == 'staging'
-                }
-            }
-            environment {
-
-                APK_VERSION = sh(
-                    returnStdout: true, 
-                    script: "echo \$(grep 'version:' pubspec.yaml | awk '{print \$2}')"
-                ).trim()
-
-                APK_DIRECTORY = './wms_development_apk/app-armeabi-v7a-release.apk'
-            }
-            steps{
-                sh 'scp ${APK_DIRECTORY} wms1_windows:\\\\Handheld\\\\cicd\\\\development'
-            }
-        }
         stage("Build Production"){
             when {
                 expression {
@@ -62,5 +33,35 @@ pipeline {
                 sh 'scp ${APK_DIRECTORY} wms1_windows:\\\\Handheld\\\\cicd\\\\production'
             }
         }
+        stage("Build Development"){
+            when {
+                expression {
+                    return env.GIT_BRANCH =='staging'
+                }
+            }
+            steps{
+                sh "docker-compose -f docker-compose.dev.yml up --build"
+            }
+        }
+        stage('Deploy Development'){
+            when {
+                expression {
+                    return env.GIT_BRANCH == 'staging'
+                }
+            }
+            environment {
+
+                APK_VERSION = sh(
+                    returnStdout: true, 
+                    script: "echo \$(grep 'version:' pubspec.yaml | awk '{print \$2}')"
+                ).trim()
+
+                APK_DIRECTORY = './wms_development_apk/app-armeabi-v7a-release.apk'
+            }
+            steps{
+                sh 'scp ${APK_DIRECTORY} wms1_windows:\\\\Handheld\\\\cicd\\\\development'
+            }
+        }
+        
     }
 }  
