@@ -95,7 +95,11 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(PickingAPIPaths.hostNameScheme + '\n${RecoleccionAPIPaths.hostNameScheme}'),
+            const Text(APIPaths.baseApiUrl +
+                '\n${PickingAPIPaths.hostNameScheme}' +
+                '\n${RecoleccionAPIPaths.hostNameScheme}' +
+                '\n${SupplyApiPaths.hostNameScheme}' +
+                '\n${DispatchApiPaths.hostNameScheme}'),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
@@ -112,6 +116,21 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
+class APIPaths {
+  static const String baseApiUrl = String.fromEnvironment('RECEIVINGBASEAPI',
+      //testing
+      defaultValue: 'https://wms.agglobal.com/ingreso-test/api/');
+  //defaultValue: 'http://192.168.3.10:6052/api/');
+  //produccion
+  //defaultValue: 'http://192.168.3.4:6051/api/');
+
+  static const String ingresoUrl = baseApiUrl + 'Ingreso';
+  static const String positionProductUrl = ingresoUrl + '/GetPositionProducts?position=';
+  static const String loginUrl = baseApiUrl + 'login/login?';
+  static const String imageUrl = 'http://192.168.3.2:5566/';
+  static const String imageProvider = 'https://res.cloudinary.com/agglobal-com/image/upload/';
+}
+
 class PickingAPIPaths {
   static const String hostNameScheme = String.fromEnvironment('PICKINGBASEAPI',
       defaultValue: 'https://wms.agglobal.com/picking-test');
@@ -126,4 +145,35 @@ class RecoleccionAPIPaths {
   static const String hostNameScheme = String.fromEnvironment('RECOLECCIONBASEAPI',
       defaultValue: 'http://192.168.3.10:6057/api/recolecciones/');
   //defaultValue: 'http://192.168.3.4:4001/api/recolecciones/');//produccion
+}
+
+class SupplyApiPaths {
+  static const String hostNameScheme = String.fromEnvironment('SUPPLYBASEAPI',
+      defaultValue: 'https://wms.agglobal.com/inventory-test');
+  static const String restockOrders = hostNameScheme + '/api/Supply/employee/Restock/Orders';
+  static const String suppyRequest = hostNameScheme + '/api/Supply/picking/';
+  static const String beginRestock = hostNameScheme + '/api/Supply/beginRestock/';
+  static const String validateReservePosition = hostNameScheme + '/api/Supply/position/';
+  static const String endSupply = hostNameScheme + '/api/Supply/EndSupply';
+}
+
+class DispatchApiPaths {
+  static const String hostNameScheme = String.fromEnvironment('DISPATCHBASEAPI',
+      defaultValue: 'https://wms.agglobal.com/despacho-test');
+  static const String trunkGuides = hostNameScheme + '/api/tracking-numbers';
+  static const String warehouseOrders = hostNameScheme + '/api/warehouse-orders/';
+
+  static String setCloseTruckGuideEndpoint(String id) {
+    return trunkGuides + '/$id/close';
+  }
+
+  static String setEmbarkEndpoint(String idTruckGuide, String idBundle, String idDesglose) {
+    return hostNameScheme +
+        "/api/tracking-numbers/$idTruckGuide/bundles/$idBundle/partition/$idDesglose/embark";
+  }
+
+  static String setDisembarkEndpoint(String idTruckGuide, String idBundle, String idDesglose) {
+    return hostNameScheme +
+        "/api/tracking-numbers/$idTruckGuide/bundles/$idBundle/partition/$idDesglose/disembark";
+  }
 }
