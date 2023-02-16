@@ -95,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(PickingAPIPaths.hostNameScheme),
+            const Text(PickingAPIPaths.hostNameScheme + '\n${RecoleccionAPIPaths.hostNameScheme}'),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
@@ -120,4 +120,10 @@ class PickingAPIPaths {
   static const String reasonsIncomplete = routes + '/reasons-incomplete';
   static const String finishRoute = routes + '/finish';
   static const String beginRoute = routes + '/begin';
+}
+
+class RecoleccionAPIPaths {
+  static const String hostNameScheme = String.fromEnvironment('RECOLECCIONBASEAPI',
+      defaultValue: 'http://192.168.3.10:6057/api/recolecciones/');
+  //defaultValue: 'http://192.168.3.4:4001/api/recolecciones/');//produccion
 }
