@@ -7,7 +7,7 @@ pipeline {
         stage("Build Production"){
             when {
                 expression {
-                    return env.GIT_BRANCH =='staging'
+                    return env.GIT_BRANCH =='main'
                 }
             }
             steps{
@@ -18,7 +18,7 @@ pipeline {
         stage('Deploy Production'){
             when {
                 expression {
-                    return env.GIT_BRANCH == 'staging'
+                    return env.GIT_BRANCH == 'main'
                 }
             }
             environment {
@@ -33,7 +33,7 @@ pipeline {
                 sh 'scp ${APK_DIRECTORY} wms1_windows:\\\\Handheld\\\\cicd\\\\production'
             }
         }
-        /* stage("Build Development"){
+        stage("Build Development"){
             when {
                 expression {
                     return env.GIT_BRANCH =='staging'
@@ -61,7 +61,7 @@ pipeline {
             steps{
                 sh 'scp ${APK_DIRECTORY} wms1_windows:\\\\Handheld\\\\cicd\\\\development'
             }
-        } */
+        }
         
     }
 }  
