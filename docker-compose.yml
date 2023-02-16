@@ -8,14 +8,7 @@ services:
         dockerfile: Dockerfile
     volumes: 
         - ./wms_production_apk/:/app/build/app/outputs/flutter-apk
-    command: >
-      "flutter build apk --split-per-abi 
-      --dart-define=RECEIVINGBASEAPI=${RECEIVINGBASEAPI} 
-      --dart-define=PICKINGBASEAPI=${PICKINGBASEAPI} 
-      --dart-define=SUPPLYBASEAPI=${SUPPLYBASEAPI} 
-      --dart-define=DISPATCHBASEAPI=${DISPATCHBASEAPI} 
-      --dart-define=DISPATCHBASEAPI=${DISPATCHBASEAPI} 
-      --dart-define=RECOLECCIONBASEAPI=${RECOLECCIONBASEAPI} 
-      --dart-define=ISPRODUCTION=true"
+    command: 
+      "flutter build apk --split-per-abi --dart-define=RECEIVINGBASEAPI=${RECEIVINGBASEAPI} --dart-define=PICKINGBASEAPI=${PICKINGBASEAPI} --dart-define=SUPPLYBASEAPI=${SUPPLYBASEAPI} --dart-define=DISPATCHBASEAPI=${DISPATCHBASEAPI} --dart-define=DISPATCHBASEAPI=${DISPATCHBASEAPI} --dart-define=RECOLECCIONBASEAPI=${RECOLECCIONBASEAPI} --dart-define=ISPRODUCTION=true"
 
       
