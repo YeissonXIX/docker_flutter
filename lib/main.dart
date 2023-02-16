@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'ESTE ES UN EJEMPLO'),
     );
   }
 }
@@ -95,12 +95,10 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
+            const Text(PickingAPIPaths.hostNameScheme),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
         ),
@@ -112,4 +110,14 @@ class _MyHomePageState extends State<MyHomePage> {
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+}
+
+class PickingAPIPaths {
+  static const String hostNameScheme = String.fromEnvironment('PICKINGBASEAPI',
+      defaultValue: 'https://wms.agglobal.com/picking-test');
+  static const String asignationStatusPath = hostNameScheme + '/api/Routes/asignation-status';
+  static const String routes = hostNameScheme + '/api/Routes';
+  static const String reasonsIncomplete = routes + '/reasons-incomplete';
+  static const String finishRoute = routes + '/finish';
+  static const String beginRoute = routes + '/begin';
 }

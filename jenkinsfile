@@ -21,16 +21,19 @@ pipeline {
                 }
             }
             environment {
+
                 APK_VERSION = sh(
                     returnStdout: true, 
                     script: "echo \$(grep 'version:' pubspec.yaml | awk '{print \$2}')"
                 ).trim()
+
+                APK_DIRECTORY = './wms_development_apk/app-armeabi-v7a-release.apk'
             }
             steps{
-                sh 'scp ./wms_development_apk/app-armeabi-v7a-release.apk wms1_windows:\\\\Handheld\\\\cicd\\\\development'
+                sh 'scp ${APK_DIRECTORY} wms1_windows:\\\\Handheld\\\\cicd\\\\development'
             }
         }
-        /* stage("Build Production"){
+        stage("Build Production"){
             when {
                 expression {
                     return env.GIT_BRANCH =='main'
@@ -52,10 +55,12 @@ pipeline {
                     returnStdout: true, 
                     script: "echo \$(grep 'version:' pubspec.yaml | awk '{print \$2}')"
                 ).trim()
+
+                APK_DIRECTORY = './wms_production_apk/app-armeabi-v7a-release.apk'
             }
             steps{
-                sh 'scp ./apks/app-armeabi-v7a-release.apk wms1_windows:\\\\Handheld\\\\cicd\\\\production'
+                sh 'scp ${APK_DIRECTORY} wms1_windows:\\\\Handheld\\\\cicd\\\\production'
             }
-        } */
+        }
     }
 }  
