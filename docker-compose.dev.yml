@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  flutter:
+    image: "flutter_wms_development_app"
+    build: 
+        context: .
+        dockerfile: Dockerfile
+    volumes: 
+        - ./wms_development_apk/:/app/build/app/outputs/flutter-apk
+    command:
+      "flutter build apk --split-per-abi"

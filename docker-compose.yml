@@ -2,12 +2,13 @@ version: '3.4'
 
 services:
   flutter:
-    image: "flutter_wms_app"
+    image: "flutter_wms_production_app"
     build: 
         context: .
         dockerfile: Dockerfile
     volumes: 
-        - ./wms_apk/:/app/build/app/outputs/flutter-apk
-    
+        - ./wms_production_apk/:/app/build/app/outputs/flutter-apk
+    command:
+      "flutter build apk --split-per-abi --build-number=${BUILD_NUMBER} --build-name=${GIT_TAG} --dart-define=RECEIVINGBASEAPI=${RECEIVINGBASEAPI} --dart-define=PICKINGBASEAPI=${PICKINGBASEAPI} --dart-define=SUPPLYBASEAPI=${SUPPLYBASEAPI} --dart-define=DISPATCHBASEAPI=${DISPATCHBASEAPI}"
 
       

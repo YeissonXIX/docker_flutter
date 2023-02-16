@@ -1,14 +1,25 @@
+//Nota: hay dos archivos docker compose, 
+//uno compila apk con variables de entorno y el otro no.
+
 pipeline {
     agent any
     stages {
-        stage("Build"){
+        stage("Build Development"){
+            when {
+                expression {
+                    return env.GIT_BRANCH =='staging'
+                }
+            }
             steps{
-                //Habilitar variables de entorno
-                sh "cp /var/lib/jenkins/Environment/WMS_Mobile .env"
-                sh "docker-compose up --build"
+                sh "docker-compose -f docker-compose.dev.yml up --build"
             }
         }
-        stage('Deploy'){
+        stage('Deploy Development'){
+            when {
+                expression {
+                    return env.GIT_BRANCH == 'staging'
+                }
+            }
             environment {
                 APK_VERSION = sh(
                     returnStdout: true, 
@@ -16,11 +27,35 @@ pipeline {
                 ).trim()
             }
             steps{
-                //Cambiar el nombre del apk a su version actual
-                //sh 'mv ./apks/app-armeabi-v7a-release.apk ${APK_VERSION}.apk'
-                //Enviar al servidor ftp
-                sh 'scp ./apks/app-armeabi-v7a-release.apk wms1_windows:\\\\Handheld\\\\cicd\\\\development'
+                sh 'scp ./wms_development_apk/app-armeabi-v7a-release.apk wms1_windows:\\\\Handheld\\\\cicd\\\\development'
             }
         }
+        /* stage("Build Production"){
+            when {
+                expression {
+                    return env.GIT_BRANCH =='main'
+                }
+            }
+            steps{
+                sh 'cp /var/lib/jenkins/Environment/WMS_Mobile .env'
+                sh "docker-compose up --build"
+            }
+        }
+        stage('Deploy Production'){
+            when {
+                expression {
+                    return env.GIT_BRANCH == 'main'
+                }
+            }
+            environment {
+                APK_VERSION = sh(
+                    returnStdout: true, 
+                    script: "echo \$(grep 'version:' pubspec.yaml | awk '{print \$2}')"
+                ).trim()
+            }
+            steps{
+                sh 'scp ./apks/app-armeabi-v7a-release.apk wms1_windows:\\\\Handheld\\\\cicd\\\\production'
+            }
+        } */
     }
 }  

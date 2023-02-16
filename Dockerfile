@@ -35,4 +35,4 @@ ENV PATH "$PATH:$ANDROID_SDK_ROOT/platform-tools"
 #Copia todos los archivos del proyecto a la imagen
 COPY . . 
 
-CMD ["flutter","build","apk","--split-per-abi"]
+#CMD ["flutter","build","apk","--split-per-abi"]
